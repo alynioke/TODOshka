@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', array('as' => 'index', 'uses' => 'TodoController@index'));
+Route::post('/', array('as' => 'tasks.store', 'uses' => 'TodoController@store'));
+
+App::missing(function($exception){
+	return View::make('notfound')->withError($exception);
 });
