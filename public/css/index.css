@@ -1,0 +1,10 @@
+
+.urgent {
+	background-color: #CC6666;
+}
+.important {
+	font-weight: bold;
+}
+.row-margin {
+	margin-bottom:10px;
+}

@@ -1,43 +1,31 @@
 <!doctype html>
-<html>
+<html lang="en" ng-app="todoApp">
 <head>
-    <meta charset="utf-8">
-    <link href="{{URL::asset('/index.css')}}" rel="stylesheet" />
+	<meta charset="utf-8">
+	<title>Google Phone Gallery</title>
+
+	<script src="[[URL::asset('/js/angular.js')]]"></script>
+	<script src="[[URL::asset('/js/controllers.js')]]"></script>
+	<script src="[[URL::asset('/js/filters.js')]]"></script>
+
+	<link href="[[URL::asset('/css/index.css')]]" rel="stylesheet" />
+	<link href="[[URL::asset('/css/bootstrap.min.css')]]" rel="stylesheet" media="screen">
 </head>
-<body>
-	<h2>Add new</h2>
-	{{Form::open(['route' => 'tasks.store'])}}
-		{{Form::label('task', 'Task')}}
-		{{Form::text('content')}}
-		{{Form::submit('Save!')}}
-	{{Form::close()}}
+<body ng-controller="PhoneListCtrl">
 
+  <div class="container">
 
-    <h2>Today</h2>
-	@foreach($today as $t)
-		<li @if($t->urgent) class="urgent" @endif 
-			@if($t->important) class="important" @endif 
-		>
-			
-			{{$t->content}}
-		</li>
-	@endforeach
-
-	<h2>Tomorrow</h2>
-	@foreach($tomorrow as $t)
-		<li @if($t->urgent) class="urgent" @endif 
-			@if($t->important) class="important" @endif >
-			{{$t->content}}
-		</li>
-	@endforeach
-
-	<h2>Later</h2>
-	@foreach($later as $t)
-		<li @if($t->urgent) class="urgent" @endif 
-			@if($t->important) class="important" @endif >
-			{{$t->content}}
-		</li>
-	@endforeach
+	<h2>Today</h2>
+		<div class="row row-margin" ng-repeat="t in todays">
+			<div class="col-md-1 btn btn-danger">R</div>
+			<div class="col-md-1 btn btn-info">B</div>
+			<div class="col-md-8 btn btn-info">
+				{{t.content}}
+			</div>
+			<div class="col-md-1 btn btn-info">T</div>
+			<div class="col-md-1 btn btn-info">?</div>
+		</div>
+  </div>
 
 </body>
 </html>

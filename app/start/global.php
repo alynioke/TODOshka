@@ -20,6 +20,12 @@ ClassLoader::addDirectories(array(
 
 ));
 
+
+
+
+Blade::setEscapedContentTags('[[', ']]');
+Blade::setContentTags('[[[', ']]]');
+
 /*
 |--------------------------------------------------------------------------
 | Application Error Logger
