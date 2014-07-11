@@ -1,5 +1,5 @@
-angular.module('phonecatFilters', []).filter('checkmark', function() {
+angular.module('todoBoolFilter', []).filter('boolval', function() {
   return function(input) {
-    return input ? '\u2713' : '\u2718';
+    return input ? 'TRUE' : 'FALSE';
   };
 });
