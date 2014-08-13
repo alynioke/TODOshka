@@ -2,28 +2,30 @@
 
 class TodoController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+
 	public function index()
 	{
-		$today = Task::getTodays();
-		$tomorrow = Task::getTomorrows();
-		$later = Task::getLaters();
-
-		return View::make('index')->withToday($today)->withTomorrow($tomorrow)->withLater($later);
+		return Response::json(Task::getTodays());
 	}
 
 	public function store() {
+
 		$task = new Task();
 		$task->content = Input::get('content');
-
 		$task->save();
 
-		return Redirect::route('index');
+		return Response::json(array('success' => true));
 	}
+
+	public function update($id) {
+		$task = Task::find($id);
+		foreach (Input::get() as $key => $value) {
+			$task->$key = $value=='true'?1:0;
+		}
+		$task->save();
+		return Response::json(array('success' => true));
+	}
+
 
 
 }

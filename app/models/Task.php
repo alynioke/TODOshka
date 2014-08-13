@@ -2,18 +2,18 @@
 
 class Task extends Eloquent  {
 
-	public $timestamps = false;
+	//public $timestamps = false;
 
-    protected $fillable = array('content', 'urgent', 'important', 'tomorrow', 'later');
+    protected $fillable = array('content', 'urgent', 'important', 'tomorrow', 'later', 'created_at', 'updated_at');
 
     public static function getTodays() {
-    	$today = new DateTime('today');
-    	$tasks = Task::whereNull('tomorrow')->whereNull('later')->get();
-    	
-    	//$relativeToday = Task::where('tomorrow', '1')->get();
-    	//$tasks = array_merge($purelyToday, $relativeToday);
+        $today = new DateTime('today');
+        $tasks = Task::where('tomorrow', 0)->where('later', 0)->get();
 
-    	return $tasks;
+        //$relativeToday = Task::where('tomorrow', '1')->get();
+        //$tasks = array_merge($purelyToday, $relativeToday);
+
+        return $tasks;
     }
 
     public static function getTomorrows() {

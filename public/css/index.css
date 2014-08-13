@@ -1,10 +1,47 @@
+@font-face {
+    font-family: Important;
+    src: url(../fonts/HelveticaCyr-Bold.otf);
+    /*Helvetica-Condensed.otf, HelveticaNeue-Thin.otf*/ 
+}
+@font-face {
+    font-family: Normal;
+    src: url(../fonts/HelveticaNeue-Thin.otf);
+    /*Helvetica-Condensed.otf, HelveticaNeue-Thin.otf*/ 
+}
 
+body {
+	font-family: Normal !important;
+}
 .urgent {
-	background-color: #CC6666;
+	background-color: #CC6666 !important;
 }
 .important {
-	font-weight: bold;
+	font-weight: bold !important;	
+	font-family: Important !important;
 }
 .row-margin {
-	margin-bottom:10px;
+	margin-top:10px;
+}
+.done {
+	text-decoration:line-through !important;
+	background-color: #CACACA !important;
+}
+.row > .btn {
+	height: 47px;
+	font-size: 21px;
+	overflow: hidden;
+}
+.row > .btn {
+	height: 47px;
+	font-size: 21px;
+	overflow: hidden;
+}
+.editable-buttons {
+	width: 13%;
+}
+.optional div {
+	visibility:hidden;
+}
+.optional:hover div {
+	visibility:visible;
 }
