@@ -2,8 +2,6 @@
 
 /* Controllers */
 
-
-
 var todoApp = angular.module('todoApp', ['boolvalFilter', 'xeditable', 'TaskService']);
 
 todoApp
@@ -13,17 +11,22 @@ todoApp
 
 .controller('TaskListCtrl', function($scope, Task) {
 
-  //$scope.task = {};
   $scope.todays = {};
+  $scope.tomorrows = {};
+  $scope.laters = {};
 
-  //!! reuse that code how 
-  Task.get()
+  var getTasks = function() {
+    Task.get()
     .success(function(data) {
-      $scope.todays = data;
+      $scope.todays = data['todays'];
+      $scope.tomorrows = data['tomorrows'];
+      $scope.laters = data['laters'];
     })
     .error(function(data) {   //ang function
       console.log(data);
     });
+  }
+  getTasks();
   
 
   $scope.addTask = function() {
@@ -33,22 +36,14 @@ todoApp
       .save($scope.task)        //our custom function
       .success(function(data) { //ang function
         // refresh the Task list
-          Task.get()
-            .success(function(taskData) {
-              $scope.todays = taskData;
-            })
-            .error(function(taskData) {   //ang function
-              console.log(taskData);
-            });
-
+          $(".taskInput").val('');
+          getTasks();
       })
       .error(function(data) {   //ang function
         console.log(data);
       });
 
   };
-
-
 
   $scope.getElementById = function(id) {
     for (var i = $scope.todays.length - 1; i >= 0; i--) {
@@ -57,21 +52,33 @@ todoApp
           //else ?? 
         };    
   };
-  //$scope.pred = 'created_at';
+
+  $scope.getTElementById = function(id) {
+    for (var i = $scope.tomorrows.length - 1; i >= 0; i--) {
+          if ($scope.tomorrows[i]['id'] == id)
+            return $scope.tomorrows[i];
+          //else ?? 
+        };    
+  };
+
+  $scope.getLElementById = function(id) {
+    for (var i = $scope.laters.length - 1; i >= 0; i--) {
+          if ($scope.laters[i]['id'] == id)
+            return $scope.laters[i];
+          //else ?? 
+        };    
+  };
 
 
-//update FIELD, VALUE
   $scope.toggle = function (elem, attr) {
     elem[attr] = !elem[attr];
+
+    // special processing required if changing "later" ON if "t" is ON
+    // and if T is ON and later changing to ON
+
     Task.update(elem, attr)
       .success(function(updateData){
-          Task.get()
-            .success(function(taskData) {
-              $scope.todays = taskData;
-            })
-            .error(function(taskData) {   //ang function
-              console.log(taskData);
-            });
+          getTasks();
       })
       .error(function(updateData){
       });
@@ -80,8 +87,4 @@ todoApp
   $scope.toggleDo = function(task) {
     task.done = !task.done;
   }
-
-
-
-
 });

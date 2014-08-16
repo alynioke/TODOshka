@@ -2,22 +2,34 @@
 
 class Task extends Eloquent  {
 
-	//public $timestamps = false;
+	public $timestamps = false;
 
     protected $fillable = array('content', 'urgent', 'important', 'tomorrow', 'later', 'created_at', 'updated_at');
 
-    public static function getTodays() {
+    public static function updateFormerTomorrows() {
         $today = new DateTime('today');
-        $tasks = Task::where('tomorrow', 0)->where('later', 0)->get();
+        Task::where('tomorrow', '1')
+        ->whereNotNull('updated_at')
+        ->where('updated_at', '<', $today)
+        ->update(array('tomorrow' => 0));
+    }
 
-        //$relativeToday = Task::where('tomorrow', '1')->get();
-        //$tasks = array_merge($purelyToday, $relativeToday);
-
+    public static function getTodays() {
+        //Task::updateFormerTomorrows();
+        $tasks = Task::where('tomorrow', 0)
+        ->where('later', 0)
+        ->where('tomorrow', 0)
+        ->get();
         return $tasks;
     }
 
     public static function getTomorrows() {
-    	$tasks = Task::where('tomorrow', '1')->get();
+        $today = new DateTime('today');
+        $tomorrow = new DateTime('tomorrow');
+    	$tasks = Task::where('tomorrow', '1')
+        ->where('updated_at', '<', $tomorrow)
+        ->where('updated_at', '>', $today)
+        ->get();
     	return $tasks;
     }
 
@@ -25,5 +37,10 @@ class Task extends Eloquent  {
     	$tasks = Task::where('later', '1')->get();
     	return $tasks;
     }
+
+
+    // public function setUpdatedAt($value) {
+        
+    // }
     
 }

@@ -11,6 +11,14 @@
 
 body {
 	font-family: Normal !important;
+	background-color: rgba(230, 230, 230, 0.1);
+	padding: 10px 0 70px 0;
+}
+h1 {
+	margin-top: 30px;
+}
+.container {
+	margin-top:45px;
 }
 .urgent {
 	background-color: #CC6666 !important;
@@ -44,4 +52,40 @@ body {
 }
 .optional:hover div {
 	visibility:visible;
+}
+.addTask {
+	height: 80px;
+	z-index: 999;
+	width: 100%;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 15px;	
+	position: fixed;
+	top: 0;
+	background-color: rgba(255, 255, 255, 0.9);
+	border-bottom: 1px solid #e5e5e5;
+}
+.taskInput:focus {
+
+}
+
+.help, .stats {
+	z-index: 1000;
+	position: fixed;
+	margin-left: 4%;
+	margin-top: 1em;
+	cursor: pointer;
+}
+
+.stats {
+	right: 4%;
+}
+
+.glyphicon-question-sign, .glyphicon-stats {
+    font-size: 2em;
+    opacity: 0.3;
+}
+.glyphicon-question-sign:hover, .glyphicon-stats:hover {
+	color:#66CC00;
+    opacity: 0.9;
 }
