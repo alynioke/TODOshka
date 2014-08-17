@@ -15,6 +15,7 @@ Route::get('/', function() {
 	return View::make('index');
 });
 Route::resource('tasks', 'TodoController', array('only' => array('index', 'store', 'update')));
+Route::resource('quotes','QuoteController', array('only' => array('show', 'index')));
 
 App::missing(function($exception){
 	return View::make('notfound')->withError($exception);

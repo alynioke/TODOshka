@@ -1,5 +1,4 @@
 angular.module('TaskService', [])
-
 .factory('Task', function($http) {
 	return {
 		get : function() {

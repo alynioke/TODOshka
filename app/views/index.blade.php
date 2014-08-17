@@ -22,22 +22,75 @@
 
 
 <body ng-controller="TaskListCtrl">
-	<div class="help">
+
+
+
+	<!-- Modal for HELP-->
+	<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="helpModalLabel">Help</h4>
+				</div>
+				<div class="modal-body">
+					Lorem help ipsum dolor sit amet, consectetur adipisicing elit. Odit earum fugiat dolor, facere temporibus molestias aspernatur sunt vero asperiores voluptate, eum quidem! Quas accusamus, id sequi et, cumque fugit enim!
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for STATS-->
+	<div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="statsModalLabel">Statistics</h4>
+				</div>
+				<div class="modal-body">
+					Lorem stats ipsum dolor sit amet, consectetur adipisicing elit. Odit earum fugiat dolor, facere temporibus molestias aspernatur sunt vero asperiores voluptate, eum quidem! Quas accusamus, id sequi et, cumque fugit enim!
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="help" data-toggle="modal" data-target="#helpModal">
 		<span class="glyphicon glyphicon-question-sign"></span>
 	</div>
 	<div class="addTask">
 		<form ng-submit="addTask()" >
 			<div class="input-group">
-				<input autocomplete="off" autofocus type="text" class="form-control input-lg taskInput" name="task" ng-model="task" placeholder="Do something awesome!">
+				<input autocomplete="off" autofocus type="text" class="form-control input-lg taskInput" name="task" ng-model="task">
 				<span class="input-group-btn">
 				  <button type="submit" class="btn btn-default btn-lg">Create</button>
 				</span>
 			</div>
 		</form>	
 	</div>
-	<div class="stats">
+	<div class="stats" data-toggle="modal" data-target="#statsModal">
 		<span class="glyphicon glyphicon-stats"></span>
 	</div>
+
+
+
 
   	<div class="container">
 		<h1 class="text-center">Today</h1>
@@ -56,7 +109,7 @@
 						{{t.urgent | ifUrgent}}
 						{{t.important | ifImportant}}
 						{{t.done | ifDone}}"
-					data-ng-click="toggleDo(getElementById(t.id))"
+					data-ng-click="toggle(getElementById(t.id), 'done')"
 				>
 				<span editable-text="t.content" ng-click="$event.stopPropagation();" >
 					{{t.content}}
@@ -93,7 +146,7 @@
 						{{t.urgent | ifUrgent}}
 						{{t.important | ifImportant}}
 						{{t.done | ifDone}}"
-					data-ng-click="toggleDo(getTElementById(t.id))"
+					data-ng-click="toggle(getTElementById(t.id), 'done')"
 				>
 				<span editable-text="t.content" ng-click="$event.stopPropagation();" >
 					{{t.content}}
@@ -130,7 +183,7 @@
 						{{t.urgent | ifUrgent}}
 						{{t.important | ifImportant}}
 						{{t.done | ifDone}}"
-					data-ng-click="toggleDo(getLElementById(t.id))"
+					data-ng-click="toggle(getLElementById(t.id), 'urgent')"
 				>
 				<span editable-text="t.content" ng-click="$event.stopPropagation();" >
 					{{t.content}}

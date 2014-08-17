@@ -4,7 +4,7 @@ class Task extends Eloquent  {
 
 	public $timestamps = false;
 
-    protected $fillable = array('content', 'urgent', 'important', 'tomorrow', 'later', 'created_at', 'updated_at');
+    protected $fillable = array('content', 'urgent', 'important', 'tomorrow', 'later', 'done', 'created_at', 'updated_at');
 
     public static function updateFormerTomorrows() {
         $today = new DateTime('today');

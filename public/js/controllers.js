@@ -83,8 +83,4 @@ todoApp
       .error(function(updateData){
       });
   }
-
-  $scope.toggleDo = function(task) {
-    task.done = !task.done;
-  }
 });

@@ -31,16 +31,8 @@ class TodoController extends \BaseController {
 				$task->tomorrow = 0;
 			}
 		}
-		//$d = $task->updated_at = $task->updated_at->setDate("2014", "01", "01");
-		
-		//print_R($task->updated_at);
-		//print_R($d);
-
 
 		$task->save();
 		return Response::json(array('success' => true));
 	}
-
-
-
 }
